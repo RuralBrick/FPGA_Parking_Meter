@@ -30,6 +30,7 @@ module test_clocks;
 
 	// Outputs
 	wire clk_1Hz;
+	wire clk_fast;
 	wire clk_blink;
 
 	// Instantiate the Unit Under Test (UUT)
@@ -37,6 +38,7 @@ module test_clocks;
 		.clk(clk), 
 		.rst(rst), 
 		.clk_1Hz(clk_1Hz), 
+		.clk_fast(clk_fast),
 		.clk_blink(clk_blink)
 	);
 	
