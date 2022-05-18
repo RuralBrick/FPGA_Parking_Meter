@@ -27,9 +27,18 @@ module parking_meter(
     input btnd,
     input btnr,
     input [7:0] JA,
-    output [7:0] seg,
-    output [3:0] an
+    output reg [7:0] seg,
+    output reg [3:0] an
     );
+
+	wire rst;
+
+	debouncer debouncer1(.clk(clk), .btn(btnr), .state(rst));
+
+	wire clk_1Hz;
+	wire clk_blink;
+	
+	clocks clocks1(.clk(clk), .rst(rst), .clk_1Hz(clk_1Hz), .clk_blink(clk_blink));
 
 
 endmodule
