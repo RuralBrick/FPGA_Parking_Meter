@@ -34,6 +34,10 @@ module parking_meter(
 	wire rst;
 
 	debouncer debouncer1(.clk(clk), .btn(btnr), .state(rst));
+	
+	wire parked;
+	
+	sensor sensor1(.JA(JA), .parked(parked));
 
 	wire clk_1Hz;
 	wire clk_fast;
@@ -46,9 +50,16 @@ module parking_meter(
 		.clk_fast(clk_fast),
 		.clk_blink(clk_blink)
 	);
-
-	reg state_blink;
-
+	
+	wire [11:0] sec_count;
+	
+	second_counter second_counter1(
+		.clk_1Hz(clk_1Hz),
+		.rst(rst),
+		.parked(parked),
+		.sec_count(sec_count)
+	);
+	
 	wire [3:0] digit3;
 	wire [3:0] digit2;
 	wire [3:0] digit1;
@@ -57,7 +68,7 @@ module parking_meter(
 	display_control display_control1(
 		.clk_fast(clk_fast),
 		.clk_blink(clk_blink),
-		.state_blink(state_blink),
+		.parked(parked),
 		.digit3(digit3),
 		.digit2(digit2),
 		.digit1(digit1),

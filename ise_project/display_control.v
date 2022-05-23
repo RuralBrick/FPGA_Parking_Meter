@@ -21,7 +21,7 @@
 module display_control(
     input clk_fast,
     input clk_blink,
-    input state_blink,
+    input parked,
     input [3:0] digit3,
     input [3:0] digit2,
     input [3:0] digit1,
@@ -66,8 +66,12 @@ module display_control(
 			9: seg <= 'b00001001;
 		endcase
 		
-		if (state_blink && clk_blink)
-			seg <= 'b11111111;
+		if (parked) begin
+			if (clk_blink)
+				seg <= 'b11111111;
+			else
+				seg[0] <= 0;
+		end
 		
 		digit <= digit + 1;
 	end
