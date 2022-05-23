@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    14:35:11 05/23/2022 
+// Create Date:    15:18:35 05/23/2022 
 // Design Name: 
-// Module Name:    time_display 
+// Module Name:    cost_display 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,20 +18,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module time_display(
-    input [11:0] sec_count,
-    output [3:0] min_tens,
-    output [3:0] min_ones,
-    output [3:0] sec_tens,
-    output [3:0] sec_ones
+module cost_display(
+    input [13:0] cost,
+    output [3:0] dol_tens,
+    output [3:0] dol_ones,
+    output [3:0] cent_tens,
+    output [3:0] cent_ones
     );
 
-	assign min_tens = (sec_count / 600) % 10;
+	assign dol_tens = (cost / 1000) % 10;
 
-	assign min_ones = (sec_count / 60) % 10;
+	assign dol_ones = (cost / 100) % 10;
 
-	assign sec_tens = ((sec_count % 60) / 10) % 10;
-	
-	assign sec_ones = sec_count % 10;
+	assign cent_tens = (cost / 10) % 10;
+
+	assign cent_ones = cost % 10;
 
 endmodule

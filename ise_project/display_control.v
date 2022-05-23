@@ -54,23 +54,23 @@ module display_control(
 		endcase
 		
 		case (value)
-			0: seg <= 'b00000011;
-			1: seg <= 'b10011111;
-			2: seg <= 'b00100101;
-			3: seg <= 'b00001101;
+			0: seg <= 'b11000000;
+			1: seg <= 'b11111001;
+			2: seg <= 'b10100100;
+			3: seg <= 'b10110000;
 			4: seg <= 'b10011001;
-			5: seg <= 'b01001001;
-			6: seg <= 'b01000001;
-			7: seg <= 'b00011111;
-			8: seg <= 'b00001001;
-			9: seg <= 'b00001001;
+			5: seg <= 'b10010010;
+			6: seg <= 'b10000010;
+			7: seg <= 'b11111000;
+			8: seg <= 'b10010000;
+			9: seg <= 'b10010000;
 		endcase
 		
 		if (parked) begin
 			if (clk_blink)
 				seg <= 'b11111111;
 			else
-				seg[0] <= 0;
+				seg[7] <= 0;
 		end
 		
 		digit <= digit + 1;

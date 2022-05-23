@@ -60,6 +60,10 @@ module parking_meter(
 		.sec_count(sec_count)
 	);
 	
+	wire [13:0] cost;
+	
+	assign cost = sec_count;
+	
 	wire [3:0] min_tens;
 	wire [3:0] min_ones;
 	wire [3:0] sec_tens;
@@ -73,6 +77,19 @@ module parking_meter(
 		.sec_ones(sec_ones)
 	);
 	
+	wire [3:0] dol_tens;
+	wire [3:0] dol_ones;
+	wire [3:0] cent_tens;
+	wire [3:0] cent_ones;
+	
+	cost_display cost_display1(
+		.cost(cost),
+		.dol_tens(dol_tens),
+		.dol_ones(dol_ones),
+		.cent_tens(cent_tens),
+		.cent_ones(cent_ones)
+	);
+	
 	reg [3:0] digit3;
 	reg [3:0] digit2;
 	reg [3:0] digit1;
@@ -80,7 +97,10 @@ module parking_meter(
 	
 	always @* begin
 		if (parked) begin
-		
+			digit3 = dol_tens;
+			digit2 = dol_ones;
+			digit1 = cent_tens;
+			digit0 = cent_ones;
 		end
 		else begin
 			digit3 = min_tens;

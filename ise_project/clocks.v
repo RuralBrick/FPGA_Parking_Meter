@@ -40,21 +40,21 @@ module clocks(
 			clk_blink <= 0;
 		end
 		else begin
-			if (count_1Hz == 50000000) begin
+			if (count_1Hz >= 50000000) begin
 				count_1Hz <= 0;
 				clk_1Hz <= ~clk_1Hz;
 			end
 			else
 				count_1Hz <= count_1Hz + 1;
 				
-			if (count_fast == 20000) begin
+			if (count_fast >= 20000) begin
 				count_fast <= 0;
 				clk_fast <= ~clk_fast;
 			end
 			else
 				count_fast <= count_fast + 1;
 				
-			if (count_blink == 30000000) begin
+			if (count_blink >= 30000000) begin
 				count_blink <= 0;
 				clk_blink <= ~clk_blink;
 			end
