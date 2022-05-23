@@ -60,10 +60,35 @@ module parking_meter(
 		.sec_count(sec_count)
 	);
 	
-	wire [3:0] digit3;
-	wire [3:0] digit2;
-	wire [3:0] digit1;
-	wire [3:0] digit0;
+	wire [3:0] min_tens;
+	wire [3:0] min_ones;
+	wire [3:0] sec_tens;
+	wire [3:0] sec_ones;
+	
+	time_display time_display1(
+		.sec_count(sec_count),
+		.min_tens(min_tens),
+		.min_ones(min_ones),
+		.sec_tens(sec_tens),
+		.sec_ones(sec_ones)
+	);
+	
+	reg [3:0] digit3;
+	reg [3:0] digit2;
+	reg [3:0] digit1;
+	reg [3:0] digit0;
+	
+	always @* begin
+		if (parked) begin
+		
+		end
+		else begin
+			digit3 = min_tens;
+			digit2 = min_ones;
+			digit1 = sec_tens;
+			digit0 = sec_ones;
+		end	
+	end
 	
 	display_control display_control1(
 		.clk_fast(clk_fast),
