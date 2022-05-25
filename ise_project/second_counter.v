@@ -27,7 +27,7 @@ module second_counter(
 
 	always @(posedge rst or posedge clk_1Hz) begin
 		if (rst)
-			sec_count <= 0;
+			sec_count <= 720;
 		else if (!parked)
 			if (sec_count > 3599)
 				sec_count <= 0;

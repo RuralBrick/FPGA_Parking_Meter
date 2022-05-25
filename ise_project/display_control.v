@@ -35,22 +35,10 @@ module display_control(
 	
 	always @(posedge clk_fast) begin
 		case (digit)
-			3: begin
-				value <= digit3;
-				an <= 'b0111;
-			end
-			2: begin
-				value <= digit2;
-				an <= 'b1011;
-			end
-			1: begin
-				value <= digit1;
-				an <= 'b1101;
-			end
-			0: begin
-				value <= digit0;
-				an <= 'b1110;
-			end
+			0: value <= digit0;
+			1: value <= digit1;
+			2: value <= digit2;
+			3: value <= digit3;
 		endcase
 		
 		case (value)
@@ -62,16 +50,23 @@ module display_control(
 			5: seg <= 'b10010010;
 			6: seg <= 'b10000010;
 			7: seg <= 'b11111000;
-			8: seg <= 'b10010000;
+			8: seg <= 'b10000000;
 			9: seg <= 'b10010000;
 		endcase
 		
 		if (parked) begin
 			if (clk_blink)
 				seg <= 'b11111111;
-			else
+			else if (digit == 3)
 				seg[7] <= 0;
 		end
+		
+		case (digit)
+			0: an <= 'b0111;
+			1: an <= 'b1110;
+			2: an <= 'b1101;
+			3: an <= 'b1011;
+		endcase
 		
 		digit <= digit + 1;
 	end

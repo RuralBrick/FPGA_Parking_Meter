@@ -37,7 +37,10 @@ module parking_meter(
 	
 	wire parked;
 	
-	sensor sensor1(.JA(JA), .parked(parked));
+	reg [7:0] tempJA = 0;
+	always @* tempJA[0] = btns;
+	
+	sensor sensor1(.JA(tempJA), .parked(parked));
 
 	wire clk_1Hz;
 	wire clk_fast;
@@ -62,7 +65,7 @@ module parking_meter(
 	
 	wire [13:0] cost;
 	
-	assign cost = sec_count;
+	cost_convert cost_convert1(.sw(sw), .sec_count(sec_count), .cst(cost));
 	
 	wire [3:0] min_tens;
 	wire [3:0] min_ones;

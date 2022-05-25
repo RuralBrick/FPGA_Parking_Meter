@@ -3,8 +3,12 @@
 module cost_convert(
  input [7:0] sw, 
  input [11:0] sec_count,
- output [13:0] cost
+ output [13:0] cst
 );
+ 
+ reg [13:0] cost = 0;
+ 
+ assign cst = cost;
  
  wire [2:0] location;
  assign location = sw[7:5];
@@ -16,13 +20,10 @@ module cost_convert(
  
  //convert seconds to minutes
  always @* begin
-  if(sec_count % 60 != 0){
+  if(sec_count % 60 != 0)
      min_count = sec_count / 60 + 1;
-  }
-  else{
+  else
      min_count = sec_count / 60;
-  }
- end
 
  //based on the location and time, calculate cost in cents accordingly
  if (location == 'b000) begin
@@ -127,7 +128,7 @@ module cost_convert(
    cost = min_count * 1.78;
   //6 pm to 12 am
   end else if (hour >= 'b10010 && hour < 'b11000) begin
-     cost = min_count * 1.56;
+   cost = min_count * 1.56;
   end
 
  end else if (location == 'b111) begin
