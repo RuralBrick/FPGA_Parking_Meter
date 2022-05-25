@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    14:15:56 05/23/2022 
+// Create Date:    15:18:35 05/23/2022 
 // Design Name: 
-// Module Name:    second_counter 
+// Module Name:    cost_display 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,21 +18,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module second_counter(
-    input clk_1Hz,
-    input rst,
-    input parked,
-    output reg [11:0] sec_count
+module cost_display(
+    input [13:0] cost,
+    output [3:0] dol_tens,
+    output [3:0] dol_ones,
+    output [3:0] cent_tens,
+    output [3:0] cent_ones
     );
 
-	always @(posedge rst or posedge clk_1Hz) begin
-		if (rst)
-			sec_count <= 720;
-		else if (!parked)
-			if (sec_count > 3599)
-				sec_count <= 0;
-			else
-				sec_count <= sec_count + 1;
-	end
+	assign dol_tens = (cost / 1000) % 10;
+
+	assign dol_ones = (cost / 100) % 10;
+
+	assign cent_tens = (cost / 10) % 10;
+
+	assign cent_ones = cost % 10;
 
 endmodule

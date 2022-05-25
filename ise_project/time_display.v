@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    14:15:56 05/23/2022 
+// Create Date:    14:35:11 05/23/2022 
 // Design Name: 
-// Module Name:    second_counter 
+// Module Name:    time_display 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,21 +18,20 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module second_counter(
-    input clk_1Hz,
-    input rst,
-    input parked,
-    output reg [11:0] sec_count
+module time_display(
+    input [11:0] sec_count,
+    output [3:0] min_tens,
+    output [3:0] min_ones,
+    output [3:0] sec_tens,
+    output [3:0] sec_ones
     );
 
-	always @(posedge rst or posedge clk_1Hz) begin
-		if (rst)
-			sec_count <= 720;
-		else if (!parked)
-			if (sec_count > 3599)
-				sec_count <= 0;
-			else
-				sec_count <= sec_count + 1;
-	end
+	assign min_tens = (sec_count / 600) % 10;
+
+	assign min_ones = (sec_count / 60) % 10;
+
+	assign sec_tens = ((sec_count % 60) / 10) % 10;
+	
+	assign sec_ones = sec_count % 10;
 
 endmodule

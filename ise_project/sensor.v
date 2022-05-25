@@ -23,6 +23,6 @@ module sensor(
     output reg parked
     );
 
-	always @* parked = 1;
+	always @* parked = JA[0];
 
 endmodule
