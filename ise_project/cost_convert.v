@@ -118,16 +118,16 @@ module cost_convert(
    end else if (location == 'b110) begin
    //12 am to 8 am
    if (hour >= 'b00000 && hour < 'b01000) begin
-      cost = min_count * 1.34;
+      cost = min_count * 1;
    //8 am to 1 pm
    end else if (hour >= 'b01000 && hour < 'b01101) begin
-      cost = min_count * 1.56;
+      cost = min_count * 2;
    //1 pm to 6 pm
    end else if (hour >= 'b01101 && hour < 'b10010) begin
-      cost = min_count * 1.78;
+      cost = min_count * 2;
    //6 pm to 12 am
    end else if (hour >= 'b10010 && hour < 'b11000) begin
-      cost = min_count * 1.56;
+      cost = min_count * 1;
    end
 
    end else if (location == 'b111) begin
