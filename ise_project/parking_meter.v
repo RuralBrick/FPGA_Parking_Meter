@@ -36,7 +36,7 @@ module parking_meter(
 	
 	wire parked;
 	
-	sensor sensor1(.MISO(MISO), .SS(SS), .SCLK(SCLK), .MOSI(MOSI), .parked(parked));
+	sensor sensor1(.clk(clk), .MISO(MISO), .SS(SS), .SCLK(SCLK), .MOSI(MOSI), .parked(parked));
 
 	wire clk_1Hz;
 	wire clk_fast;

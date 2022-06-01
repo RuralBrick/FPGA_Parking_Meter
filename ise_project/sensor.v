@@ -20,12 +20,34 @@
 //////////////////////////////////////////////////////////////////////////////////
 module sensor(
     input MISO,
-	 output reg SS,
-	 output reg SCLK,
-	 output reg MOSI,
-    output reg parked
+    input clk,
+	 output SS,
+	 output SCLK,
+	 output MOSI,
+    output parked
     );
-	
-	
+
+	 reg [31:0] counter_cursor = 0;
+     reg clk_cursor = 0; // Ticks at 30 Hz
+     always @(posedge clk)
+     begin
+        counter_cursor <= (counter_cursor == 1666666) ? 0 : counter_cursor + 1;
+        if (counter_cursor == 0)
+            clk_cursor <= ~clk_cursor;    
+     end
+
+	// Data read from PmodJSTK
+	wire [39:0] jstkData;
+  
+	joy joy(
+		.CLK(clk),
+		1,
+		.MISO(MISO),
+		.SS(SS),
+		.SCLK(SCLK),
+		.DOUT(jstkData)
+	);
+    
+    assign parked = |jstkData;
 
 endmodule
