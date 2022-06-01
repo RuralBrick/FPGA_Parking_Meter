@@ -26,7 +26,7 @@ module sensor(
 	 output MOSI,
     output parked
     );
-
+    assign MOSI = 0;
 	 reg [31:0] counter_cursor = 0;
      reg clk_cursor = 0; // Ticks at 30 Hz
      always @(posedge clk)
@@ -41,13 +41,13 @@ module sensor(
   
 	joy joy(
 		.CLK(clk),
-		1,
+		.sndRec(clk_cursor),
 		.MISO(MISO),
 		.SS(SS),
 		.SCLK(SCLK),
 		.DOUT(jstkData)
 	);
     
-    assign parked = |jstkData;
+    assign parked = jstkData[39];
 
 endmodule

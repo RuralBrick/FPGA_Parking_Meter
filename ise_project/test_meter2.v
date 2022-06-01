@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   15:49:31 05/23/2022
+// Create Date:   15:32:07 06/01/2022
 // Design Name:   parking_meter
-// Module Name:   D:/m152a/lab4/ise_project/test_meter.v
+// Module Name:   D:/m152a/lab4/ise_project/test_meter2.v
 // Project Name:  ise_project
 // Target Device:  
 // Tool versions:  
@@ -22,7 +22,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module test_meter;
+module test_meter2;
 
 	// Inputs
 	reg clk;
@@ -31,11 +31,11 @@ module test_meter;
 	reg MISO;
 
 	// Outputs
-	wire [7:0] seg;
-	wire [3:0] an;
 	wire SS;
 	wire SCLK;
 	wire MOSI;
+	wire [7:0] seg;
+	wire [3:0] an;
 
 	// Instantiate the Unit Under Test (UUT)
 	parking_meter uut (
@@ -45,11 +45,11 @@ module test_meter;
 		.MISO(MISO), 
 		.SS(SS), 
 		.SCLK(SCLK), 
-		.MOSI(MOSI),
+		.MOSI(MOSI), 
 		.seg(seg), 
 		.an(an)
 	);
-
+	
 	always #1 clk = ~clk;
 
 	initial begin
