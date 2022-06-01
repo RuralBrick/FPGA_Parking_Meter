@@ -21,26 +21,22 @@
 module parking_meter(
     input clk,
     input [7:0] sw,
-    input btns,
-    input btnu,
-    input btnl,
-    input btnd,
-    input btnr,
-    input [7:0] JA,
+    input btn_reset,
+	 input MISO,
+    output SS,
+	 output SCLK,
+	 output MOSI,
     output [7:0] seg,
     output [3:0] an
     );
 
 	wire rst;
 
-	debouncer debouncer1(.clk(clk), .btn(btnr), .state(rst));
+	debouncer debouncer1(.clk(clk), .btn(btn_reset), .state(rst));
 	
 	wire parked;
 	
-	reg [7:0] tempJA = 0;
-	always @* tempJA[0] = btns;
-	
-	sensor sensor1(.JA(tempJA), .parked(parked));
+	sensor sensor1(.MISO(MISO), .SS(SS), .SCLK(SCLK), .MOSI(MOSI), .parked(parked));
 
 	wire clk_1Hz;
 	wire clk_fast;

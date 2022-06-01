@@ -19,10 +19,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module sensor(
-    input [7:0] JA,
+    input MISO,
+	 output reg SS,
+	 output reg SCLK,
+	 output reg MOSI,
     output reg parked
     );
-
-	always @* parked = JA[0];
+	
+	
 
 endmodule
